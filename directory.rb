@@ -1,6 +1,8 @@
-def input_students
+$months = ["january", "febuary", "march", "april", "may", "june", "july", "august",
+  "september", "obctober", "november", "december"]
   puts "Please enter the names, start month, hobby and dob of the students"
-  puts "To finish, just hit return twice"
+  puts "To finish, just hit return repeatedly without any input"
+def input_students
   # create an empty array
   $students = []
   # get the first name
@@ -9,12 +11,12 @@ def input_students
   hobby = gets.chomp
   dob = gets.chomp
   # while the name is not empty, repeat this code
-  while !name.empty? do
+  while (!name.empty? && !month.empty? && !hobby.empty? && !dob.empty?) do
     # add the student hash to the array
-    if month.empty?
-      $students << {name: name, cohort: "no month inputted for", hobby: hobby, DOB: dob}
-    else
+    if !month.empty? && $months.include?(month.downcase)
       $students << {name: name, cohort: month, hobby: hobby, DOB: dob}
+    elsif 
+      $students << {name: name, cohort: "no month inputted for", hobby: hobby, DOB: dob}
     end
     puts "Now we have #{$students.count} students"
     # get another name from the user
@@ -35,8 +37,8 @@ end
 def print(students)
   i = 1
   while $students.length >= i
-    puts "#{i}. #{$students[i-1][:name]} (#{$students[i-1][:cohort]} cohort)".center(35)
-    puts "hobby: #{$students[i-1][:hobby]} DOB: #{$students[i-1][:DOB]}".center(30)
+    puts "#{i}. #{$sorted_hash[i-1][:name]} (#{$sorted_hash[i-1][:cohort]} cohort)".center(35)
+    puts "hobby: #{$sorted_hash[i-1][:hobby]} DOB: #{$sorted_hash[i-1][:DOB]}".center(30)
     i += 1
   end
 end
@@ -47,6 +49,9 @@ def print_footer(names)
 end
 
 $students = input_students
+
+$sorted_hash = $students.sort_by { |h| h[:cohort] }
+
 print_header
-print($students)
+print($sorted_hash)
 print_footer($students)
