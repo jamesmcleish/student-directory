@@ -22,21 +22,22 @@ def input_students
 end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  puts "The students of Villains Academy".center(30, '-')
+  puts "-------------".center(30)
 end
 
 def print(students)
   i = 1
   while $students.length >= i
-    puts "#{i}. #{$students[i-1][:name]} (#{$students[i-1][:cohort]} cohort)
-    hobby: #{$students[i-1][:hobby]} DOB: #{$students[i-1][:DOB]}"
+    puts "#{i}. #{$students[i-1][:name]} (#{$students[i-1][:cohort]} cohort)".center(35)
+    puts "hobby: #{$students[i-1][:hobby]} DOB: #{$students[i-1][:DOB]}".center(30)
     i += 1
   end
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+  centered_str = "Overall, we have #{names.count} great students".center(41, '-')
+  puts centered_str
 end
 
 $students = input_students
