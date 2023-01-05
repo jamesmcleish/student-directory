@@ -23,10 +23,8 @@ def print_header
 end
 
 def print(students)
-  puts "search students by first letter in name"
-  input = gets.chomp
   $students.each_with_index do |student, index|
-    if student[:name][0].to_s == input
+    if student[:name].length < 12
       puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
