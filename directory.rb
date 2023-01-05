@@ -1,19 +1,25 @@
 def input_students
-  puts "Please enter the names, hobby and dob of the students"
+  puts "Please enter the names, start month, hobby and dob of the students"
   puts "To finish, just hit return twice"
   # create an empty array
   $students = []
   # get the first name
   name = gets.chomp
+  month = gets.chomp
   hobby = gets.chomp
   dob = gets.chomp
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    $students << {name: name, cohort: :november, hobby: hobby, DOB: dob}
+    if month.empty?
+      $students << {name: name, cohort: "no month inputted for", hobby: hobby, DOB: dob}
+    else
+      $students << {name: name, cohort: month, hobby: hobby, DOB: dob}
+    end
     puts "Now we have #{$students.count} students"
     # get another name from the user
     name = gets.chomp
+    month = gets.chomp
     hobby = gets.chomp
     dob = gets.chomp
   end
