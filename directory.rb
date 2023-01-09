@@ -18,7 +18,11 @@ def input_students
     elsif 
       $students << {name: name, cohort: "no month inputted for", hobby: hobby, DOB: dob}
     end
-    puts "Now we have #{$students.count} students"
+    if $students.count == 1
+      puts "Now we have #{$students.count} student"
+    elsif $students.count > 1
+      puts "Now we have #{$students.count} students"
+    end
     # get another name from the user
     name = gets.chomp
     month = gets.chomp
