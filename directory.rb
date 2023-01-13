@@ -1,8 +1,9 @@
 $months = ["january", "febuary", "march", "april", "may", "june", "july", "august",
   "september", "obctober", "november", "december"]
-  puts "Please enter the names, start month, hobby and dob of the students"
-  puts "To finish, just hit return repeatedly without any input"
+
 def input_students
+  puts "Please enter the names, start month, hobby and date of birth 'dd/mm/yyyy' of the students"
+  puts "To finish, just hit return repeatedly without any input"
   # create an empty array
   $students = []
   # get the first name
@@ -38,7 +39,7 @@ def print_header
   puts "-------------".center(30)
 end
 
-def print(students)
+def print_students_list(students)
   i = 1
   while $students.length >= i
     puts "#{i}. #{$sorted_hash[i-1][:name]} (#{$sorted_hash[i-1][:cohort]} cohort)".center(35)
@@ -57,5 +58,5 @@ $students = input_students
 $sorted_hash = $students.sort_by { |h| h[:cohort] }
 
 print_header
-print($sorted_hash)
+print_students_list($sorted_students)
 print_footer($students)
