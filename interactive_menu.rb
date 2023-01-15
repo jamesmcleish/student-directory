@@ -32,8 +32,7 @@ def input_students
     dob = gets.chomp
   end
   # return the array of students
-  $sorted_hash = $students.sort_by { |h| h[:cohort] }
-  $students
+  puts $students
 end
 
 
@@ -66,6 +65,7 @@ def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
+  puts "4. Load the list from students.csv"
   puts "9. Exit" # 9 because we'll be adding more items  
 end
 
@@ -77,6 +77,7 @@ end
 
 def print_students_list(students)
   i = 1
+  $sorted_hash = $students.sort_by { |h| h[:cohort] }
   while $students.length >= i
     puts "#{i}. #{$sorted_hash[i-1][:name]} (#{$sorted_hash[i-1][:cohort]} cohort)".center(35)
     puts "hobby: #{$sorted_hash[i-1][:hobby]} DOB: #{$sorted_hash[i-1][:DOB]}".center(30)
@@ -104,6 +105,8 @@ def process(selection)
       show_students
     when "3"
       save_students
+    when "4"
+      load_students
     when "9"
       exit
     else
@@ -122,10 +125,19 @@ def save_students
   # open the file for writing
   file = File.open("students.csv", "w")
   # iterate over the array of students
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
+  $students.each do |student|
+    student_data = [student[:name], student[:cohort], student[:hobby], student[:DOB]]
     csv_line = student_data.join(",")
     file.puts csv_line
+  end
+  file.close
+end
+
+def load_students(filename = "students.csv")
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line|
+  name, cohort, hobby, dob = line.chomp.split(',')
+    $students << {name: name, cohort: cohort, hobby: hobby, DOB: dob}
   end
   file.close
 end
